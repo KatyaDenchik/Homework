@@ -1,0 +1,3 @@
+﻿  OOPC++1.cpp
+C:\Users\User\source\repos\OOPC++1\OOPC++1\OOPC++1.cpp(32,33): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  OOPC++1.vcxproj -> C:\Users\User\source\repos\OOPC++1\x64\Debug\OOPC++1.exe
