@@ -22,18 +22,14 @@ ostream& operator << (ostream& os, MyClass& myClass)
 }
 istream& operator >> (istream& in, MyClass& myClass)
 {
-    vector<int> temp; 
-    int value;
-    while ( in >> value && cin.get() != '\n')
-    {
-        temp.push_back(value);
-    }
+    string value;
+    in >> value;
 
-    MyClass newClass(temp.size());
+    MyClass newClass(value.size());
 
-    for (size_t i = 0; i < temp.size(); i++)
+    for (size_t i = 0; i < value.size(); i++)
     {
-        newClass.Data[i] = temp[i];
+        newClass.Data[i] = value[i];
     }
 
     myClass = newClass;
@@ -46,7 +42,30 @@ int main()
     Setup();
     MyClass myClass;
 
+    cout << "Введите двоичное число: ";
     cin >> myClass;
-    cout << myClass;
+
+    long n = 0;
+    long multiplier = 1, divisor = 1; 
+    for (size_t i = 0; i < myClass.Size; i++)
+    {
+        if (myClass.Data[i] == '.')
+        {
+            divisor = multiplier;
+        }
+        else
+        {
+            n += (myClass.Data[i] - '0') * multiplier;
+            multiplier *= 2;
+        }
+    }
+
+    double res = double(n) / double(divisor);
+
+    cout << "Десятичное число: " << res << endl;
+
+
+    cout << endl;
+    system("pause");
 }
 

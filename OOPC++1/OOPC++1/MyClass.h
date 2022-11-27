@@ -10,15 +10,15 @@ using namespace std;
 class MyClass
 {
 public:
-	int* Data;
+	char* Data;
 public:
 	int Size;
 
 public:
-	MyClass(int size)
+	MyClass(char size)
 	{
 		this->Size = size;
-		this->Data = new int[size];
+		this->Data = new char[size];
 
 	}
 
@@ -32,7 +32,7 @@ public:
 	MyClass(const MyClass& other)
 	{
 		this->Size = other.Size;
-		this->Data = new int[other.Size];
+		this->Data = new char[other.Size];
 	}
 
 };
