@@ -51,21 +51,19 @@ int main()
     {
         if (myClass.Data[i] == '.')
         {
-            divisor = multiplier;
+            divisor = 1;
         }
         else
         {
-            n += (myClass.Data[i] - '0') * multiplier;
-            multiplier *= 2;
+            auto digit = int(myClass.Data[i] - '0');
+
+            n =n*2 + digit; 
+            divisor *= 2;
         }
     }
 
     double res = double(n) / double(divisor);
 
-    cout << "Десятичное число: " << res << endl;
-
-
-    cout << endl;
-    system("pause");
+    cout << "Десятичне число: " << res << endl;
 }
 
