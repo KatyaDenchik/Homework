@@ -11,12 +11,12 @@ using namespace std;
 class MyClass
 {
 public:
-	int* FirstData;
+	double* FirstData;
 public:
 	int FirstDataSize;
 
 public:
-	int* SecondData;
+	double* SecondData;
 public:
 	int SecondDataSize;
 
@@ -24,9 +24,9 @@ public:
 	MyClass(char firstDataSize, char secondDataSize)
 	{
 		this->FirstDataSize = firstDataSize;
-		this->FirstData = new int[firstDataSize];
+		this->FirstData = new double[firstDataSize];
 		this->SecondDataSize = secondDataSize;
-		this->SecondData = new int[secondDataSize];
+		this->SecondData = new double[secondDataSize];
 	}
 
 public:
@@ -45,17 +45,17 @@ public:
 	}
 
 public:
-	void Print() 
+	double* GetCombinedData()
 	{
 		int size = FirstDataSize + SecondDataSize;
-		int* combinedData = new int[size];
+		double* combinedData = new double[size];
 
 		Sort(FirstData, FirstDataSize);
 		Sort(SecondData, SecondDataSize);
 
 		for (size_t i = 0; i < size; i++)
 		{
-			if (size <= FirstDataSize)
+			if (i < FirstDataSize)
 			{
 				combinedData[i] = FirstData[i];
 			}
@@ -64,9 +64,10 @@ public:
 				combinedData[i] = SecondData[i- FirstDataSize];
 			}
 		}
+		return combinedData;
 	}
 
-	void Sort(int* x, int size, int dir = 1)
+	void Sort(double* x, int size, int dir = 1)
 	{
 		for (int i = 1; i < size; ++i)
 			for (int j = size - 1; j >= i; --j)

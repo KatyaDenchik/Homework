@@ -7,63 +7,109 @@ using namespace std;
 
 void Setup()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 }
+double ToDecimal(const MyClass&);
+
+void ReadFromFile(std::string&, MyClass&);
 
 ostream& operator << (ostream& os, MyClass& myClass)
 {
-    for (size_t i = 0; i < myClass.Size; i++)
-    {
-         os << myClass.Data[i]<< endl;
-    }
-    
-    return os;
+	for (size_t i = 0; i < myClass.Size; i++)
+	{
+		os << myClass.Data[i] << endl;
+	}
+
+	return os;
 }
 istream& operator >> (istream& in, MyClass& myClass)
 {
-    string value;
-    in >> value;
+	string value;
 
-    MyClass newClass(value.size());
+	in >> value;
 
-    for (size_t i = 0; i < value.size(); i++)
-    {
-        newClass.Data[i] = value[i];
-    }
+	MyClass newClass(value.size());
 
-    myClass = newClass;
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		newClass.Data[i] = value[i];
+	}
 
-    return in;
+	myClass = newClass;
+
+	return in;
 }
 
 int main()
 {
-    Setup();
-    MyClass myClass;
+	Setup();
+	MyClass myClass;
+	string pathToFile = "C:\\Users\\User\\Desktop\\Homework\\OOPC++1\\test.txt";
 
-    cout << "Введите двоичное число: ";
-    cin >> myClass;
+	string answer;
+	cout << "Оберіть джерело інформації:" << endl;
+	cout << "1: Консоль;" << endl;
+	cout << "2: Файл." << endl;
+	cin >> answer;
 
-    long n = 0;
-    long multiplier = 1, divisor = 1; 
-    for (size_t i = 0; i < myClass.Size; i++)
-    {
-        if (myClass.Data[i] == '.')
-        {
-            divisor = 1;
-        }
-        else
-        {
-            auto digit = int(myClass.Data[i] - '0');
+	if (answer == "1" || answer == "Консоль")
+	{
+		cout << "Вкажіть двоічне число:" << endl;
+		cin >> myClass;
+	}
+	else if (answer == "2" || answer == "Файл")
+	{
 
-            n =n*2 + digit; 
-            divisor *= 2;
-        }
-    }
+		cout << "Вкажіть шлях до файлу:" << endl;
+		string pathToFile;
+		cin >> pathToFile;
+		ReadFromFile(pathToFile, myClass);
+	}
+	else
+	{
+		cout << "Невідома команда, спробуйте ще раз" << endl;
+		main();
+	}
 
-    double res = double(n) / double(divisor);
-
-    cout << "Десятичне число: " << res << endl;
+	double value = ToDecimal(myClass);
+	cout << "Десятичне число: " << value << endl;
 }
+
+void ReadFromFile(std::string& pathToFile, MyClass& myClass)
+{
+	fstream in(pathToFile);
+	if (!in.is_open())
+	{
+		cout << "Не вдалось відкрити файл";
+	}
+	else
+	{
+		in >> myClass;
+	}
+}
+
+double ToDecimal(const MyClass& myClass)
+{
+	long n = 0;
+	long multiplier = 1, divisor = 1;
+	for (size_t i = 0; i < myClass.Size; i++)
+	{
+		if (myClass.Data[i] == '.')
+		{
+			divisor = 1;
+		}
+		else
+		{
+			auto digit = int(myClass.Data[i] - '0');
+
+			n = n * 2 + digit;
+			divisor *= 2;
+		}
+	}
+
+	double res = double(n) / double(divisor);
+	return res;
+}
+
 
