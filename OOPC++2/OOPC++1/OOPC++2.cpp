@@ -7,8 +7,8 @@ using namespace std;
 
 void Setup()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 }
 
 void ReadFromFile(std::string&, MyClass&);
@@ -28,47 +28,31 @@ ostream& operator << (ostream& os, MyClass& myClass)
 }
 istream& operator >> (istream& in, MyClass& myClass)
 {
-	MyClass newClass(7,9);
+	MyClass newClass(9, 7);
+	double temp;
 	int count = 0;
-	string line;
-	vector<string> lines;
-
-	while (getline(in, line))
+	while (in >> temp)
 	{
-		lines.push_back(line);
-		count++;
+		newClass.FirstData[count] = temp;
 
-		if (count == 2)
+		count++;
+		if (count == newClass.FirstDataSize)
 		{
+			count = 0;
 			break;
 		}
 	}
 
-	for (size_t i = 0; i < 2; i++)
+	while (in >> temp)
 	{
-		double temp;
-		for (auto letter: lines[i])
+		newClass.SecondData[count] = temp;
+
+		count++;
+		if (count == newClass.SecondDataSize)
 		{
-			try
-			{
-
-			}
-			catch (const std::exception&)
-			{
-
-			}
+			count = 0;
+			break;
 		}
-		
-	}
-	for (size_t i = 0; i < newClass.FirstDataSize; i++)
-	{
-		
-			//newClass.FirstData[i];
-	}
-
-	for (size_t i = 0; i < newClass.SecondDataSize; i++)
-	{
-		in >> newClass.SecondData[i];
 	}
 
 	myClass = newClass;
@@ -113,10 +97,61 @@ void ReadFromFile(std::string& pathToFile, MyClass& myClass)
 	if (!in.is_open())
 	{
 		cout << "Не вдалось відкрити файл";
+		return;
 	}
-	else
+	MyClass newClass(9, 7);
+	int count = 0;
+	string line;
+	vector<string> lines;
+
+	while (getline(in, line))
 	{
-		in >> myClass;
+		lines.push_back(line);
+		count++;
+
+		if (count == 2)
+		{
+			break;
+		}
 	}
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		string digit;
+		int count = 0;
+		for (size_t j = 0; j <= lines[i].size(); j++)
+		{
+			auto letter = lines[i][j];
+			if (letter == '.' || ('0' <= letter && letter <= '9'))
+			{
+				digit.push_back(letter);
+			}
+			else
+			{
+				try
+				{
+					double temp = stod(digit);
+					if (i == 0)
+					{
+						newClass.FirstData[count] = temp;
+						count++;
+					}
+					else
+					{
+						newClass.SecondData[count] = temp;
+						count++;
+					}
+				}
+				catch (const std::exception&)
+				{
+
+				}
+				digit = "";
+			}
+		}
+		count = 0;
+	}
+
+	myClass = newClass;
 }
 
