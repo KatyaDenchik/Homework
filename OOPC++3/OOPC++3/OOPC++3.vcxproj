@@ -135,7 +135,11 @@
   <ItemGroup>
     <ClInclude Include="Car.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="OOPC++3.h" />
     <ClInclude Include="SalesInformation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

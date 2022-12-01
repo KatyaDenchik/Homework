@@ -1,7 +1,15 @@
 ﻿#include <list>
 #include <iostream>
 #include <iterator>
+#include <Windows.h>
+
 using namespace std;
+
+void Setup()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+}
 
 template<typename T>
 bool operator==(const T a, const T b) 
@@ -183,11 +191,13 @@ public:
 
 int main()
 {
+	Setup();
 	Train train;
 	train.Add_carriage(Carriage(15));
 	train.Add_carriage(Carriage(10));
 	train.Add_carriage(Carriage(1));
-	cout << train.Calc_places();
+	cout << train.Calc_places() << endl;
 	
+
 }
 
