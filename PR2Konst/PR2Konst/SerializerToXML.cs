@@ -20,14 +20,14 @@ namespace PR2Konst
         {
             if (!File.Exists(filePath))
             {
-                Logger.Error($"Файлу по шляху {filePath} не знайдено!", new TxtLogger(), new MessageLogger());
+                Logger.Error($"Файлу по шляху {filePath} не знайдено!");
                 return new T();
             }
-
+            StreamReader file = null;
             try
             {
                 XmlSerializer reader = new XmlSerializer(typeof(T));
-                StreamReader file = new StreamReader(filePath);
+                file = new StreamReader(filePath);
 
                 var obj = (T)reader.Deserialize(file);
 
@@ -38,8 +38,9 @@ namespace PR2Konst
             catch (Exception e)
             {
                 Logger.Error(e.Message, new TxtLogger(), new MessageLogger());
-            
-            return new T();
+
+                file?.Close();
+                return new T();
             }
         }
 
@@ -59,6 +60,6 @@ namespace PR2Konst
                 Logger.Error(e.Message, new TxtLogger(), new MessageLogger());
             }
         }
-        
+
     }
 }

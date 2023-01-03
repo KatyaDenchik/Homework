@@ -20,7 +20,7 @@ namespace PR2Konst.Loggers
             };
 
 
-            Console.WriteLine(message, consoleColor);
+            Debug.WriteLine(message, consoleColor);
         }
     }
 }

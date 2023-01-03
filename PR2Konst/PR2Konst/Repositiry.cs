@@ -23,8 +23,6 @@ namespace PR2Konst
         {
             AppConfig.Instance = Serializer.Deserialiazation<AppConfig>(Serializer.AppConfigFilePath);
             Read();
-
-
         }
 
         public static void Save()
@@ -39,7 +37,6 @@ namespace PR2Konst
         {
             Cars = Serializer.Deserialiazation<ObservableCollection<Car>>(Serializer.CarFilePath);
             Parkings = Serializer.Deserialiazation<ObservableCollection<Parking>>(Serializer.ParkingFilePath);
-
         }
     }
 }

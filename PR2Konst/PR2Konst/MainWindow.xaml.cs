@@ -1,4 +1,5 @@
 ﻿using PR2Konst.Loggers;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -13,8 +14,16 @@ namespace PR2Konst
     {
         public MainWindow()
         {
-            Logger.Debug("Запуск програми",new ConsoleLogger());
-            Repositiry.Read();
+            Logger.Debug("Запуск програми", new Loggers.MessageLogger(), new Loggers.TxtLogger());
+
+            try
+            {
+                ThrowError();
+            }
+            catch (Exception e)
+            {
+                Logger.Info($"{e.Message}", new Loggers.MessageLogger());
+            }
 
             InitializeComponent();
         }
@@ -40,6 +49,11 @@ namespace PR2Konst
                 };
 
             }
+        }
+
+        private void ThrowError()
+        {
+            throw new Exception("Произошла какая-то ошибка");
         }
     }
 }

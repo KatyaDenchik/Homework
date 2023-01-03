@@ -17,7 +17,7 @@ namespace PR2Konst
     {
         public App()
         {
-            
+
             TimerCallback tm = new TimerCallback(e =>
             {
                 Repositiry.Save();
