@@ -35,20 +35,25 @@ namespace AeroflotIZVP
         private void button2_Click(object sender, EventArgs e)
         {
             string point = textBox4.Text;
-            int k = 0;
+            bool isFind = false;
             dataGridView1.RowCount = aeroflots.Length;
-            dataGridView1.ColumnCount = 3;
+            dataGridView1.ColumnCount = 3; 
+
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+
             for (int i = 0; i < aeroflots.Length; i++)
             {
-                
-                
-                    dataGridView1[0, k].Value = Convert.ToString(aeroflots[i].destinationPointOfTheFlight);
-                    dataGridView1[1, k].Value = Convert.ToString(aeroflots[i].flightNumber);
-                    dataGridView1[2, k].Value = Convert.ToString(aeroflots[i].typeOfAircraft);
-                    k++;
-               
+
+                if (aeroflots[i].destinationPointOfTheFlight==point)
+                {
+                    dataGridView1.Rows.Add(aeroflots[i].destinationPointOfTheFlight, aeroflots[i].flightNumber, aeroflots[i].typeOfAircraft);
+                    isFind = true;
+                }
+                   
             }
-            if (k == 0)
+
+            if (!isFind)
                 MessageBox.Show("Таких рейсів немає.");
         }
     }
