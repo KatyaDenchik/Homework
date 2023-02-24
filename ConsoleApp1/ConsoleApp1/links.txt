@@ -10,4 +10,4 @@ https://www.facebook.com/groups/linux.fans.group/?mibextid=HsNCOg
 4+6=10
 6-2=4
 (a+b)3=a3+3a2b+3ab2+b3
-4!=1∗2∗3∗4=24
+4!=1*2*3*4=24
